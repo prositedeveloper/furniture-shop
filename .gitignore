@@ -1,0 +1,28 @@
+# Секреты
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+env/
+*.egg-info/
+
+# База данных
+db.sqlite3
+
+# Медиа и статика
+media/
+staticfiles/
+
+# IDE
+.idea/
+.vscode/
+*.sublime-*
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+
+# Миграции (опционально, зависит от команды)
+# */migrations/00*.py — если коммитите миграции, не игнорируйте
