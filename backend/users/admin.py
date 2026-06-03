@@ -8,6 +8,10 @@ class CustomUserAdmin(UserAdmin):
     list_display = ['id', 'username', 'email', 'first_name', 'last_name', 'phone', 'is_staff']
     list_filter = ['is_staff', 'is_active']
     search_fields = ['username', 'email', 'phone']
-    fieldsets = UserAdmin.fields + (
-        ('Дополнительная информация', {'fields': ('phone', 'avatar')})
+    fieldsets = UserAdmin.fieldsets + (
+        ('Дополнительная информация', {'fields': ('phone', 'avatar')}),
+    )
+    
+    add_fieldsets = UserAdmin.add_fieldsets + (
+        ('Дополнительная информация', {'fields': ('phone',)}),
     )
