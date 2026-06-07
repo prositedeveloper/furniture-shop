@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from decimal import Decimal
 
 # Create your models here.
 class Category(models.Model):
@@ -36,7 +37,7 @@ class Product(models.Model):
     @property
     def final_price(self):
         if self.discount > 0:
-            return self.price * (1 - self.discount / 100)
+            return self.price * (Decimal(100 - self.discount) / 100)
         return self.price 
     
 
