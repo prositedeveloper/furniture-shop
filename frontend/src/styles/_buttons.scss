@@ -1,0 +1,56 @@
+.btn {
+    @include btn-style($primary);
+
+    &-primary {
+        @include btn-style($primary);
+    }
+
+    &-secondary {
+        @include btn-style($gray-200, $gray-800, darken($gray-200, 10%));
+    }
+
+    &-outline {
+        padding: $padding-md $padding-lg;
+        border-radius: $radius-md;
+        font-weight: 500;
+        color: $primary;
+        background-color: transparent;
+        border: 2px solid $primary;
+        cursor: pointer;
+        transition: $transition;
+
+        &:hover {
+            background-color: rgba($primary, 0.1);
+        }
+
+        &:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba($primary, 0.3);
+        }
+
+        &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    }
+
+    &-danger {
+        @include btn-style($red, $white, darken($red, 10%));
+    }
+
+    &-sm {
+        padding: $padding-sm $padding-md;
+        font-size: $font-size-sm;
+    }
+
+    &-lg {
+        padding: $padding-lg $padding-xl;
+        font-size: $font-size-lg;
+    }
+
+    &-icon {
+        padding: $padding-md;
+        border-radius: $radius-md;
+        @include flex-center;
+    }
+}

@@ -1,0 +1,24 @@
+.card {
+    @include card-style;
+
+    &-body {
+        padding: $padding-lg;
+    }
+
+    &-header {
+        padding: $padding-lg;
+        border-bottom: 1px solid $gray-200;
+    }
+
+    &-footer {
+        padding: $padding-lg;
+        border-top: 1px solid $gray-200;
+    }
+
+    &-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        display: block;
+    }
+}
