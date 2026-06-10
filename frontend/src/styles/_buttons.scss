@@ -1,31 +1,35 @@
+@use 'variables' as vars;
+@use 'mixins';
+@use 'sass:color';
+
 .btn {
-    @include btn-style($primary);
+    @include mixins.btn-style(vars.$primary);
 
     &-primary {
-        @include btn-style($primary);
+        @include mixins.btn-style(vars.$primary);
     }
 
     &-secondary {
-        @include btn-style($gray-200, $gray-800, darken($gray-200, 10%));
+         @include mixins.btn-style(vars.$gray-200, vars.$gray-800, color.adjust(vars.$gray-200, $lightness: -10%));
     }
 
     &-outline {
-        padding: $padding-md $padding-lg;
-        border-radius: $radius-md;
+        padding: vars.$padding-md vars.$padding-lg;
+        border-radius: vars.$radius-md;
         font-weight: 500;
-        color: $primary;
+        color: vars.$primary;
         background-color: transparent;
-        border: 2px solid $primary;
+        border: 2px solid vars.$primary;
         cursor: pointer;
-        transition: $transition;
+        transition: vars.$transition;
 
         &:hover {
-            background-color: rgba($primary, 0.1);
+            background-color: rgba(vars.$primary, 0.1);
         }
 
         &:focus {
             outline: none;
-            box-shadow: 0 0 0 3px rgba($primary, 0.3);
+            box-shadow: 0 0 0 3px rgba(vars.$primary, 0.3);
         }
 
         &:disabled {
@@ -35,22 +39,22 @@
     }
 
     &-danger {
-        @include btn-style($red, $white, darken($red, 10%));
+        @include mixins.btn-style(vars.$red, vars.$white, color.adjust(vars.$red, $lightness: -10%));
     }
 
     &-sm {
-        padding: $padding-sm $padding-md;
-        font-size: $font-size-sm;
+        padding: vars.$padding-sm vars.$padding-md;
+        font-size: vars.$font-size-sm;
     }
 
     &-lg {
-        padding: $padding-lg $padding-xl;
-        font-size: $font-size-lg;
+        padding: vars.$padding-lg vars.$padding-xl;
+        font-size: vars.$font-size-lg;
     }
 
     &-icon {
-        padding: $padding-md;
-        border-radius: $radius-md;
-        @include flex-center;
+        padding: vars.$padding-md;
+        border-radius: vars.$radius-md;
+        @include mixins.flex-center;
     }
 }

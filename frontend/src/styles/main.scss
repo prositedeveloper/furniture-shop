@@ -1,0 +1,169 @@
+@use 'variables' as vars;
+@use 'mixins';
+@use 'base';
+@use 'buttons';
+@use 'forms';
+@use 'cards';
+
+// Header
+.header {
+    background-color: vars.$white;
+    box-shadow: vars.$shadow-sm;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: vars.$header-height;
+
+    &-container {
+        @include mixins.flex-between;
+        height: 100%;
+        padding: 0 vars.$padding-lg;
+    }
+
+    &-logo {
+        font-size: vars.$font-size-2xl;
+        font-weight: 700;
+        color: vars.$primary;
+    }
+
+    &-nav {
+        display: none;
+
+        @media (min-width: 768px) {
+            display: flex;
+            gap: vars.$padding-lg;
+        }
+
+        &-link {
+            color: vars.$gray-700;
+            font-weight: 500;
+            transition: vars.$transition;
+
+            &:hover {
+                color: vars.$primary;
+            }
+        }
+    }
+
+    &-actions {
+        @include mixins.flex-center;
+        gap: vars.$padding-md;
+    }
+
+    &-cart {
+        position: relative;
+
+        &-count {
+            position: absolute;
+            top: -0.5rem;
+            right: -0.5rem;
+            background-color: vars.$primary;
+            color: vars.$white;
+            border-radius: vars.$radius-full;
+            width: 1.5rem;
+            height: 1.5rem;
+            @include mixins.flex-center;
+            font-size: vars.$font-size-sm;
+            font-weight: 600;
+        }
+    }
+
+    &-user {
+        @include mixins.flex-center;
+        gap: vars.$padding-sm;
+
+        &-name {
+            font-weight: 500;
+        }
+    }
+
+    &-menu-btn {
+        @include mixins.flex-center;
+        padding: vars.$padding-sm;
+        border-radius: vars.$radius-md;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        transition: vars.$transition;
+
+        &:hover {
+            background-color: vars.$gray-100;
+        }
+
+        @media (min-width: 768px) {
+            display: none;
+        }
+    }
+
+    &-mobile-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: vars.$white;
+        box-shadow: vars.$shadow-lg;
+        padding: vars.$padding-lg;
+        z-index: 99;
+
+        &-active {
+            display: block;
+        }
+
+        &-nav {
+            display: flex;
+            flex-direction: column;
+            gap: vars.$padding-md;
+        }
+    }
+}
+
+// Footer
+.footer {
+    background-color: vars.$gray-900;
+    color: vars.$white;
+    padding: vars.$padding-xl 0;
+    margin-top: auto;
+
+    &-container {
+        @include mixins.flex-center;
+        flex-direction: column;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 vars.$padding-md;
+        gap: vars.$padding-xl;
+    }
+
+    &-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: vars.$padding-xl;
+        width: 100%;
+    }
+
+    &-column {
+        &-title {
+            font-size: vars.$font-size-lg;
+            font-weight: 600;
+            margin-bottom: vars.$padding-md;
+            color: vars.$gray-500;
+        }
+
+        &-links {
+            display: flex;
+            flex-direction: column;
+            gap: vars.$padding-sm;
+            list-style: none;
+            padding: 0;
+        }
+
+        &-link {
+            color: vars.$gray-400;
+            transition: vars.$transition;
+
+            &:hover {
+                color: vars.$white;
+            }
+        }
+    }
+}

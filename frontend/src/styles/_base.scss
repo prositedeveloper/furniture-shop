@@ -1,3 +1,5 @@
+@use 'variables' as vars;
+
 * {
     margin: 0;
     padding: 0;
@@ -10,30 +12,30 @@ html {
 }
 
 body {
-    font-family: $font-family;
-    background-color: $gray-50;
-    color: $gray-900;
+    font-family: vars.$font-family;
+    background-color: vars.$gray-50;
+    color: vars.$gray-900;
     line-height: 1.5;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
-    color: $gray-800;
-    margin-bottom: $padding-md;
+    color: vars.$gray-800;
+    margin-bottom: vars.$padding-md;
 }
 
-h1 { font-size: $font-size-3xl; }
-h2 { font-size: $font-size-2xl; }
-h3 { font-size: $font-size-xl; }
-h4 { font-size: $font-size-lg; }
+h1 { font-size: vars.$font-size-3xl; }
+h2 { font-size: vars.$font-size-2xl; }
+h3 { font-size: vars.$font-size-xl; }
+h4 { font-size: vars.$font-size-lg; }
 
 a {
-    color: $primary;
+    color: vars.$primary;
     text-decoration: none;
-    transition: $transition;
+    transition: vars.$transition;
 
     &:hover {
-        color: $primary-dark;
+        color: vars.$primary-dark;
     }
 }
 
@@ -46,7 +48,7 @@ img {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 $padding-lg;
+    padding: 0 vars.$padding-lg;
 }
 
 .text-center { text-align: center; }
@@ -72,8 +74,8 @@ img {
 .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
 .px-4 { padding-left: 1rem; padding-right: 1rem; }
 
-.rounded-sm { border-radius: $radius-sm; }
-.rounded-md { border-radius: $radius-md; }
-.rounded-lg { border-radius: $radius-lg; }
-.rounded-xl { border-radius: $radius-xl; }
-.rounded-full { border-radius: $radius-full; }
+.rounded-sm { border-radius: vars.$radius-sm; }
+.rounded-md { border-radius: vars.$radius-md; }
+.rounded-lg { border-radius: vars.$radius-lg; }
+.rounded-xl { border-radius: vars.$radius-xl; }
+.rounded-full { border-radius: vars.$radius-full; }

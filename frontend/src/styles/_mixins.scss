@@ -1,3 +1,6 @@
+@use 'sass:color';
+@use 'variables' as vars;
+
 @mixin flex-center {
   display: flex;
   justify-content: center;
@@ -16,15 +19,15 @@
   white-space: nowrap;
 }
 
-@mixin btn-style($bg-color, $text-color: $white, $hover-bg: darken($bg-color, 10%)) {
-    padding: $padding-md $padding-lg;
-    border-radius: $radius-md;
+@mixin btn-style($bg-color, $text-color: vars.$white, $hover-bg: color.adjust($bg-color, $lightness: -10%)) {
+    padding: vars.$padding-md vars.$padding-lg;
+    border-radius: vars.$radius-md;
     font-weight: 500;
     color: $text-color;
     background-color: $bg-color;
     border: none;
     cursor: pointer;
-    transition: $transition;
+    transition: vars.$transition;
 
     &:hover {
         background-color: $hover-bg;
@@ -43,27 +46,27 @@
 
 @mixin input-style {
     width: 100%;
-    padding: $padding-md $padding-lg;
-    border: 1px solid $gray-300;
-    border-radius: $radius-md;
-    font-size: $font-size-base;
-    transition: $transition;
+    padding: vars.$padding-md vars.$padding-lg;
+    border: 1px solid vars.$gray-300;
+    border-radius: vars.$radius-md;
+    font-size: vars.$font-size-base;
+    transition: vars.$transition;
 
     &:focus {
         outline: none;
-        border-color: $primary;
-        box-shadow: 0 0 0 3px rgba($primary, 0.1);
+        border-color: vars.$primary;
+        box-shadow: 0 0 0 3px rgba(vars.$primary, 0.1);
     }
 }
 
 @mixin card-style {
-    background-color: $white;
-    border-radius: $radius-lg;
-    box-shadow: $shadow-md;
+    background-color: vars.$white;
+    border-radius: vars.$radius-lg;
+    box-shadow: vars.$shadow-md;
     overflow: hidden;
-    transition: $transition;
+    transition: vars.$transition;
 
     &:hover {
-        box-shadow: $shadow-lg;
+        box-shadow: vars.$shadow-lg;
     }
 }

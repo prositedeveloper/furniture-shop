@@ -1,18 +1,21 @@
+@use 'variables' as vars;
+@use 'mixins';
+
 .card {
-    @include card-style;
+    @include mixins.card-style;
 
     &-body {
-        padding: $padding-lg;
+        padding: vars.$padding-lg;
     }
 
     &-header {
-        padding: $padding-lg;
-        border-bottom: 1px solid $gray-200;
+        padding: vars.$padding-lg;
+        border-bottom: 1px solid vars.$gray-200;
     }
 
     &-footer {
-        padding: $padding-lg;
-        border-top: 1px solid $gray-200;
+        padding: vars.$padding-lg;
+        border-top: 1px solid vars.$gray-200;
     }
 
     &-image {
