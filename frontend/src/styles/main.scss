@@ -166,4 +166,100 @@
             }
         }
     }
+
+    &-bottom {
+        border-top: 1px solid vars.$gray-800;
+        padding-top: vars.$padding-lg;
+        text-align: center;
+        color: vars.$gray-400;
+        font-size: vars.$font-size-sm;
+    }
 }
+
+// Product
+.product {
+    &-card {
+        @include mixins.card-style;
+        margin-bottom: vars.$padding-lg;
+
+        &-image {
+            position: relative;
+            overflow: hidden;
+            height: 250px;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+
+                &:hover {
+                    transform: scale(1.05);
+                }
+            }
+        }
+
+        &-discount {
+            position: absolute;
+            top: vars.$padding-md;
+            right: vars.$padding-md;
+            background-color: vars.$primary;
+            color: vars.$white;
+            padding: vars.$padding-sm vars.$padding-md;
+            border-radius: vars.$radius-full;
+            font-size: vars.$font-size-sm;
+            font-weight: 600;
+        }
+
+        &-body {
+            padding: vars.$padding-lg;
+        }
+
+        &-title {
+            font-size: vars.$font-size-lg;
+            font-weight: 600;
+            margin-bottom: vars.$padding-sm;
+            @include mixins.text-truncate;
+        }
+
+        &-price {
+            @include mixins.flex-center;
+            gap: vars.$padding-sm;
+            margin-bottom: vars.$padding-sm;
+
+            &-current {
+                font-size: vars.$font-size-xl;
+                font-weight: 700;
+                color: vars.$primary;
+            }
+
+            &-old {
+                font-size: vars.$font-size-sm;
+                color: vars.$gray-500;
+                text-decoration: line-through;
+            }
+        }
+
+        &-description {
+            color: vars.$gray-600;
+            font-size: vars.$font-size-sm;
+            margin-bottom: vars.$padding-sm;
+            display: -webkit-box;
+            line-clamp: 2;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        &-actions {
+            @include mixins.flex-between;
+        }
+
+        &-btn {
+            @include mixins.btn-style(vars.$primary, vars.$white, darken(vars.$primary, 10%));
+            padding: vars.$padding-sm vars.$padding-md;
+            font-size: vars.$font-size-sm;
+        }
+    }
+}
+
