@@ -5,6 +5,8 @@
 @use 'buttons';
 @use 'forms';
 @use 'cards';
+@use 'sass:color';
+
 
 // Header
 .header {
@@ -257,7 +259,11 @@
         }
 
         &-btn {
-            @include mixins.btn-style(vars.$primary, vars.$white, darken(vars.$primary, 10%));
+            @include mixins.btn-style(
+                vars.$primary, 
+                vars.$white, 
+                color.adjust(vars.$primary, $lightness: -10%)
+            );
             padding: vars.$padding-sm vars.$padding-md;
             font-size: vars.$font-size-sm;
         }

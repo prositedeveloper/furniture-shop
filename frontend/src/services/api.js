@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { OrigamiIcon } from 'lucide-react';
 
 const API_BASE_URL = 'http://localhost:8000/api';
 
@@ -24,6 +25,15 @@ api.interceptors.response.use(
     (response) => response,
     async (error) => {
         const originalRequest = error.config;
+
+        if (originalRequest.url?.includes('/auth/login/')) {
+            return Promise.reject(error);
+        }
+
+        if (!localStorage.getItem('refresh_token')) {
+            return Promise.reject(error);
+        }
+
         if (error.response?.status === 401 && !originalRequest._retry) {
             originalRequest._retry = true;
 
@@ -39,7 +49,6 @@ api.interceptors.response.use(
             } catch (err) {
                 localStorage.removeItem('access_token');
                 localStorage.removeItem('refresh_token');
-                window.location.href = '/login';
                 return Promise.reject(err);
             }
         }

@@ -20,7 +20,9 @@ export const AuthProvider = ({children}) => {
                 }
             } catch (error) {
                 console.error('Auth check failed:', error);
-                logout();
+                localStorage.removeItem('access_token');
+                localStorage.removeItem('refresh_token');
+                setUser(null);
             } finally {
                 setLoading(false);
             }
@@ -36,7 +38,7 @@ export const AuthProvider = ({children}) => {
             const userResponse = await api.get('/auth/profile');
             setUser(userResponse.data);
             toast.success('Вы успешно вошли!');
-            navigate('/');
+            return response.data;
         } catch (error) {
             toast.error('Неверный логин или пароль!');
             throw error;

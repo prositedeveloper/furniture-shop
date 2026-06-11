@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from "../context/AuthContext";
 import { Eye, EyeOff, LogIn } from "lucide-react";
+import toast from 'react-hot-toast';
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -18,11 +19,23 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!formData.username.trim()) {
+      toast.error('Введите имя пользователя');
+      return false;
+    }
+
+    if (!formData.password.trim()) {
+      toast.error('Введите пароль');
+      return false;
+    }
+
     try {
       await login(formData);
       navigate('/');
     } catch (error) {
       console.error('Login failed', error);
+      return false;
     }
   };
 
@@ -44,7 +57,7 @@ const LoginPage = () => {
               value={formData.username}
               onChange={handleChange}
               className="auth-page-input-group-input"
-              required
+              
             />
           </div>
 
@@ -60,7 +73,7 @@ const LoginPage = () => {
                 value={formData.password}
                 onChange={handleChange}
                 className="auth-page-input-group-input"
-                required
+                
               />
               <button
                 type="button"
