@@ -36,7 +36,7 @@ export default function HomePage() {
   return (
     <div className="container">
       <div className="home-page__hero">
-        <h1 className="home-page__title">Добро пожаловать в MebelShop</h1>
+        <h1 className="home-page__title">Добро пожаловать в Mebel_Dagestan</h1>
         <p className="home-page__subtitle">
           У нас вы найдете широчайший ассортимент мебели для вашего дома и офиса.
           Качественные материалы, современный дизайн и доступные цены.

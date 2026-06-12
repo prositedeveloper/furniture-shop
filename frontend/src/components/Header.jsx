@@ -14,7 +14,7 @@ const Header = () => {
     <div className="header">
       <div className="header-container">
         <Link to="/" className="header-logo">
-          MebelShop
+          Mebel_Dagestan
         </Link>
 
         <nav className="header-nav">

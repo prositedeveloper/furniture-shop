@@ -4,7 +4,7 @@ const Footer = () => {
       <div className="footer-container">
         <div className="footer-grid">
           <div className="footer-column">
-            <h3 className="footer-column-title">MebelShop</h3>
+            <h3 className="footer-column-title">Mebel_Dagestan</h3>
             <p className="footer-column-link">
                Интернет-магазин качественной мебели для вашего дома.
             </p>
@@ -28,7 +28,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="footer-bottom">
-          <p>© 2026 MebelShop. Все права защищены.</p>
+          <p>© 2026 Mebel_Dagestan. Все права защищены.</p>
         </div>
       </div>
     </footer>

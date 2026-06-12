@@ -1,17 +1,31 @@
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
 
+const getImageUrl = (imagePath) => {
+  if (!imagePath) return "https://placehold.co/600x400?text=Нет картинки";
+
+  if (imagePath.startsWith('http')) {
+    return imagePath;
+  }
+
+  const baseUrl = 'http://localhost:8000';
+
+  const cleanPath = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
+
+  return `${baseUrl}${cleanPath}`;
+};
+
 const ProductCard = ({ product }) => {
   return (
     <div className="product-card">
       <div className="product-card-image">
         <img
-          src={
-            product.image
-              ? `http://localhost:8000${product.image}`
-              : "/placeholder-product.jpg"
-          }
+          src={getImageUrl(product.image)}
           alt={product.title}
+          onError={(e) => {
+            console.error('Failed to load:', e.target.src);
+            e.target.src = "/placeholder-product.jpg"
+          }}
         />
         {product.discount > 0 && (
           <span className="product-card-discount">-{product.discount}%</span>

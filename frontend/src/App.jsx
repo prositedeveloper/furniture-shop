@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage'
 import { Toaster } from 'react-hot-toast';
 import RegisterPage from './pages/RegisterPage'
 import HomePage from './pages/HomePage'
+import ProductPage from './pages/ProductPage'
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Layout/>}>
           <Route index element={<HomePage />} />
+          <Route path="products/:id" element={<ProductPage />} />
           <Route path='login' element={<LoginPage />} />
           <Route path='register' element={<RegisterPage />} />
         </Route>

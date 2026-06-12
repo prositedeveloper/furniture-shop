@@ -24,9 +24,13 @@
     }
 
     &-logo {
-        font-size: vars.$font-size-2xl;
+        font-size: vars.$font-size-base;
         font-weight: 700;
         color: vars.$primary;
+
+        @media (min-width: 576px) {
+            font-size: vars.$font-size-2xl;
+        }
     }
 
     &-nav {
@@ -389,6 +393,154 @@
             padding: vars.$padding-sm vars.$padding-md;
             font-size: vars.$font-size-sm;
         }
+    }
+
+    &-page {
+        &-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: vars.$padding-xl;
+            margin: vars.$padding-xl 0;
+
+            @media (min-width: 992px) {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        &-image {
+            position: relative;
+
+            &-main {
+                width: 100%;
+                border-radius: vars.$radius-lg;
+                margin-bottom: vars.$padding-md;
+            }
+
+            &-discount {
+                position: absolute;
+                top: vars.$padding-md;
+                right: vars.$padding-md;
+                background-color: vars.$primary;
+                color: vars.$white;
+                padding: vars.$padding-md;
+                border-radius: vars.$radius-full;
+                font-size: vars.$font-size-lg;
+                font-weight: 700;
+            }
+
+            &-gallery {
+                display: flex;
+                gap: vars.$padding-sm;
+                overflow-x: auto;
+                padding-bottom: vars.$padding-sm;
+
+                &-item {
+                    flex: 0 0 120px;
+                    height: 80px;
+                    border-radius: vars.$radius-md;
+                    border: 2px solid vars.$gray-200;
+                    cursor: pointer;
+                    transition: vars.$transition;
+
+                    &:hover {
+                        border-color: vars.$primary;
+                    }
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        border-radius: vars.$radius-md;
+                    }
+                }
+            }
+        }
+
+        &-info {
+            &-title {
+                font-size: vars.$font-size-3xl;
+                margin-bottom: vars.$padding-md;
+            }
+
+            &-price {
+                @include mixins.flex-center;
+                gap: vars.$padding-md;
+                margin-bottom: vars.$padding-lg;
+
+                &-current {
+                    font-size: vars.$font-size-3xl;
+                    font-weight: 700;
+                    color: vars.$primary;
+                }
+
+                &-old {
+                    font-size: vars.$font-size-xl;
+                    color: vars.$gray-500;
+                    text-decoration: line-through;
+                }
+            }
+
+            &-section {
+                margin-bottom: vars.$padding-lg;
+
+                &-title {
+                    font-size: vars.$font-size-lg;
+                    font-weight: 600;
+                    margin-bottom: vars.$padding-sm;
+                }
+
+                &-value {
+                    color: vars.$gray-600;
+                }
+            }
+
+            &-stock {
+                color: vars.$green;
+
+                &-out {
+                    color: vars.$red;
+                }
+            }
+
+            &-quantity {
+                @include mixins.flex-center;
+                gap: vars.$padding-sm;
+                margin-bottom: vars.$padding-lg;
+
+                &-btn {
+                    padding: vars.$padding-sm vars.$padding-md;
+                    border: 1px solid vars.$gray-300;
+                    border-radius: vars.$radius-md;
+                    background-color: vars.$white;
+                    cursor: pointer;
+                    transition: vars.$transition;
+
+                    &:hover {
+                        background-color: vars.$gray-50;
+                    }
+
+                    &:disabled {
+                        opacity: 0.5;
+                        cursor: not-allowed;
+                    }
+                }
+
+                &-value {
+                    padding: vars.$padding-sm vars.$padding-lg;
+                    background-color: vars.$gray-100;
+                    border-radius: vars.$radius-md;
+                    max-width: 40px;
+                    @include mixins.flex-center;
+                }
+            }
+
+            &-add-btn {
+                @include mixins.btn-style(vars.$primary);
+                width: 100%;
+                padding: vars.$padding-md;
+                font-size: vars.$font-size-base;
+            }
+        }   
     }
 }
 
