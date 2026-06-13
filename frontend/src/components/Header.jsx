@@ -2,13 +2,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { ShoppingCart, User, LogIn, LogOut, Menu, X } from "lucide-react";
 import { useState } from "react";
+import { useCart } from "../context/CartContext";
 
 const Header = () => {
+  const { getTotalCount } = useCart();
   const { user, logout } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
 
-  const cartItemCount = 0;
+  const cartItemCount = getTotalCount();
 
   return (
     <div className="header">

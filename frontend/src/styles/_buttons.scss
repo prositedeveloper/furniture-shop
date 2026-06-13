@@ -7,6 +7,10 @@
 
     &-primary {
         @include mixins.btn-style(vars.$primary);
+
+        &:hover {
+            color: vars.$white;
+        }
     }
 
     &-secondary {

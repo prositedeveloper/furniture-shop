@@ -1,5 +1,8 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingCart, Check } from "lucide-react";
+import { useCart } from "../context/CartContext";
+import toast from "react-hot-toast";
 
 const getImageUrl = (imagePath) => {
   if (!imagePath) return "https://placehold.co/600x400?text=Нет картинки";
@@ -16,6 +19,33 @@ const getImageUrl = (imagePath) => {
 };
 
 const ProductCard = ({ product }) => {
+  const { addToCart, isInCart } = useCart();
+  const [isAdding, setIsAdding] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  const inCart = isInCart(product.id);
+
+  const handleAddToCart = async () => {
+    if (isAdding) return;
+
+    if (inCart) {
+      toast.error(`Товар "${product.title}" уже есть в корзине!`);
+      return;
+    }
+
+    setIsAdding(true);
+
+    await new Promise(resolve => setTimeout(resolve, 200));
+
+    addToCart(product, 1);
+    toast.success(`Товар "${product.title}" добавлен в корзину`)
+
+    setShowSuccess(true);
+    setTimeout(() => setShowSuccess(false), 1500);
+
+    setIsAdding(false);
+  };
+
   return (
     <div className="product-card">
       <div className="product-card-image">
@@ -48,7 +78,11 @@ const ProductCard = ({ product }) => {
           <Link to={`/products/${product.id}`} className="btn btn-outline btn-sm">
             Подробнее
           </Link>
-          <button className="btn btn-primary btn-sm">
+          <button 
+            onClick={handleAddToCart}
+            className="btn btn-primary btn-sm"
+            disabled={isAdding}
+          >
             <ShoppingCart className="h-4 w-4" />
             <span>В корзину</span>
           </button>

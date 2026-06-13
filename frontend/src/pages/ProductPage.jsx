@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import api from "../services/api";
-import { ShoppingCart, Minus, Plus } from "lucide-react";
+import { ShoppingCart, Minus, Plus, Check } from "lucide-react";
+import { useCart } from "../context/CartContext";
+import toast from "react-hot-toast";
 
 const getImageUrl = (imagePath) => {
   if (!imagePath) return "https://placehold.co/600x400?text=Нет картинки";
@@ -19,11 +21,16 @@ const getImageUrl = (imagePath) => {
 
 const ProductPage = () => {
   const { id } = useParams();
+  const { addToCart, isInCart } = useCart();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const [mainImage, setMainImage] = useState(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [isAdding, setIsAdding] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  const inCart = isInCart(Number(id));
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -62,7 +69,25 @@ const ProductPage = () => {
 
     return images;
   };
-  
+
+  const handleAddToCart = async () => {
+    if (isAdding) return;
+
+    if (inCart) {
+      toast.error(`Товар "${product.title}" уже есть в корзине!`);
+      return;
+    }
+
+    setIsAdding(true);
+    await new Promise(resolve => setTimeout(resolve, 200));
+
+    addToCart(product, quantity);
+    toast.success(`Товар "${product.title}" добавлен в корзину в количестве ${quantity} шт.`)
+
+    setTimeout(() => setShowSuccess(false), 200);
+
+    setIsAdding(false);
+  };
 
   if (loading) {
     return (
@@ -171,8 +196,9 @@ const ProductPage = () => {
           </div>
 
           <button 
+            onClick={handleAddToCart}
             className="product-page-info-add-btn"
-            disabled={product.stock <= 0}
+            disabled={product.stock <= 0 || isAdding}
           >
             <ShoppingCart className="h-5 w-5" />
             <span>Добавить в корзину</span>
