@@ -39,7 +39,7 @@ const Header = () => {
             <>
               <Link to="/profile" className="header-user">
                 <User className="w-6 h-6" />
-                <span className="header-user-name">{user.username}</span>
+                <span className="header-user-name" title={user.username}>{user.username}</span>
               </Link>
               <button onClick={logout} className="btn btn-outline btn-sm">
                 <LogOut className="h-5 w-5" />

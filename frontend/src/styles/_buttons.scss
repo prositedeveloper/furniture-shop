@@ -6,6 +6,8 @@
     @include mixins.btn-style(vars.$primary);
 
     &-primary {
+        @include mixins.flex-center;
+        gap: vars.$padding-sm;
         @include mixins.btn-style(vars.$primary);
 
         &:hover {
@@ -14,10 +16,14 @@
     }
 
     &-secondary {
-         @include mixins.btn-style(vars.$gray-200, vars.$gray-800, color.adjust(vars.$gray-200, $lightness: -10%));
+        @include mixins.flex-center;
+        gap: vars.$padding-sm;
+        @include mixins.btn-style(vars.$gray-200, vars.$gray-800, color.adjust(vars.$gray-200, $lightness: -10%));
     }
 
     &-outline {
+        @include mixins.flex-center;
+        gap: vars.$padding-sm;
         padding: vars.$padding-md vars.$padding-lg;
         border-radius: vars.$radius-md;
         font-weight: 500;

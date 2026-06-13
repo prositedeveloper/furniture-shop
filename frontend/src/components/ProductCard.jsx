@@ -54,7 +54,7 @@ const ProductCard = ({ product }) => {
           alt={product.title}
           onError={(e) => {
             console.error('Failed to load:', e.target.src);
-            e.target.src = "/placeholder-product.jpg"
+            e.target.src = "https://placehold.co/600x400?text=Нет картинки"
           }}
         />
         {product.discount > 0 && (

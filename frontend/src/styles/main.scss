@@ -81,6 +81,12 @@
 
         &-name {
             font-weight: 500;
+            @include mixins.text-truncate;
+            max-width: 100px;
+
+            @media (max-width: 768px) {
+                max-width: 80px;
+            }
         }
     }
 
@@ -908,6 +914,125 @@
         }
     }
 }
+
+// Profile
+.profile {
+    &-page {
+        &-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: vars.$padding-xl;
+        }
+
+        &-header {
+            @include mixins.flex-between;
+            margin-bottom: vars.$padding-xl;
+
+
+        }
+
+        &-title {
+            font-size: vars.$font-size-3xl;
+        }
+
+        &-avatar {
+            @include mixins.flex-center;
+            flex-direction: column;
+            margin-bottom: vars.$padding-xl;
+
+            &-image {
+                width: 120px;
+                height: 120px;
+                border-radius: vars.$radius-full;
+                object-fit: cover;
+                border: 4px solid vars.$white;
+                box-shadow: vars.$shadow-md;
+            }
+
+            &-upload {
+                position: relative;
+                margin-top: calc(-1 * vars.$padding-md);
+
+                &-btn {
+                    position: absolute;
+                    right: -20px;
+                    bottom: 0;
+                    background-color: vars.$primary;
+                    color: vars.$white;
+                    border: none;
+                    border-radius: vars.$radius-full;
+                    width: 40px;
+                    height: 40px;
+                    @include mixins.flex-center;
+                    cursor: pointer;
+                    transition: vars.$transition;
+
+                    &:hover {
+                        background-color: vars.$primary-dark;
+                    }
+
+                    input {
+                        display: none;
+                    }
+                }
+            }
+
+            &-title {
+                font-size: vars.$font-size-2xl;
+                font-weight: 700;
+                margin-bottom: vars.$padding-md;
+            }
+        }
+
+        &-form {
+            display: flex;
+            flex-direction: column;
+            gap: vars.$padding-lg;
+
+            &-container {
+                display: grid;
+                grid-template-columns: repeat(1, minmax(0, 1fr));
+                gap: vars.$padding-md;
+                
+                @media (min-width: 768px) {
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                    gap: vars.$padding-lg;
+                }
+
+                
+            }
+        }
+
+        &-field {
+            &-label {
+                @include mixins.flex-center;
+                gap: vars.$padding-sm;
+                margin-bottom: vars.$padding-sm;
+                font-weight: 500;
+                color: vars.$gray-700;
+            }
+
+            &-value {
+                @include mixins.flex-center;
+                padding: vars.$padding-md;
+                background-color: vars.$gray-50;
+                border-radius: vars.$radius-md;
+                color: vars.$gray-800;
+            }
+            
+            &-input {
+                @include mixins.input-style;
+            }
+        }
+
+        &-actions {
+            @include mixins.flex-center;
+            gap: vars.$padding-md;
+            margin-top: vars.$padding-lg;
+        }
+    }
+}
+
 
 .loading {
     &-container {

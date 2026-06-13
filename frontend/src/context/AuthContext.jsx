@@ -64,17 +64,14 @@ export const AuthProvider = ({children}) => {
         navigate('/login');
     };
 
-    const updateProfile = async (data) => {
+    const updateProfile = async (formData) => {
         try {
-            const formData = new FormData();
-            for (const key in data) {
-                if (data[key]) formData.append(key, data[key]);
-            }
             const response = await api.patch('/auth/profile/', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
             setUser(response.data);
-            toast.success('Профиль обновлен!');
+            toast.success('Профиль успешно  обновлен!');
+            return response.data;
         } catch (error) {
             toast.error('Ошибка обновления профиля!');
             throw error;
