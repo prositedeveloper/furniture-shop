@@ -35,8 +35,8 @@
 ## 📦 Клонирование репозитория
 
 ```bash
-git clone https://github.com/prositedeveloper/Mebel_Dagestan.git
-cd Mebel_Dagestan
+git clone https://github.com/prositedeveloper/furniture-shop.git
+cd furniture-shop
 ```
 
 ### 📂 Backend (Django + DRF)
