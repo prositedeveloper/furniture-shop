@@ -9,6 +9,7 @@ import HomePage from './pages/HomePage'
 import ProductPage from './pages/ProductPage'
 import CartPage from './pages/CartPage'
 import ProfilePage from './pages/ProfilePage'
+import CatalogPage from './pages/CatalogPage'
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
           <Route path='login' element={<LoginPage />} />
           <Route path='register' element={<RegisterPage />} />
           <Route path='profile' element={<ProfilePage />} />
+          <Route path='catalog' element={<CatalogPage />} />
         </Route>
       </Routes>
     </>

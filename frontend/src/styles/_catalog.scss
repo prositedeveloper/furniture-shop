@@ -1,0 +1,147 @@
+@use 'variables' as vars;
+@use 'mixins';
+
+.catalog-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: vars.$padding-xl 0;
+
+  &__container {
+    padding: 0 vars.$padding-md;
+  }
+
+  &__header {
+    margin-bottom: vars.$padding-xl;
+    text-align: center;
+  }
+
+  &__title {
+    font-size: vars.$font-size-xl;
+    font-weight: 700;
+    margin-bottom: vars.$padding-md;
+    color: vars.$gray-800;
+  }
+
+  &__subtitle {
+    color: vars.$secondary-dark;
+    font-size: vars.$font-size-lg;
+  }
+
+  &__filters {
+    background-color: vars.$white;
+    border-radius: vars.$radius-xl;
+    box-shadow: vars.$shadow-md;
+    padding: vars.$padding-lg;
+    margin-bottom: vars.$padding-xl;
+  }
+
+  &__filters-header {
+    @include mixins.flex-between;
+    margin-bottom: vars.$padding-lg;
+  }
+
+  &__filters-title {
+    font-size: vars.$font-size-xl;
+    font-weight: 600;
+    @include mixins.flex-center;
+    gap: vars.$padding-sm;
+  }
+
+  &__filters-icon {
+    width: 20px;
+    height: 20px;
+    color: vars.$primary;
+  }
+
+  &__filters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: vars.$padding-md;
+  }
+
+  &__filters-group {
+    &--checkbox {
+      @include mixins.flex-center;
+      justify-content: flex-start;
+    }
+  }
+
+  &__checkbox-label {
+    @include mixins.flex-center;
+    gap: vars.$padding-sm;
+    cursor: pointer;
+    font-size: vars.$font-size-sm;
+    color: vars.$gray-700;
+  }
+
+  &__checkbox-input {
+    width: 18px;
+    height: 18px;
+    accent-color: vars.$primary;
+  }
+
+  &__checkbox-text {
+    font-size: vars.$font-size-sm;
+  }
+
+  &__search-wrapper {
+    position: relative;
+  }
+
+  &__search-icon {
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    color: vars.$gray-400;
+  }
+
+  &__sort-buttons {
+    display: flex;
+    gap: vars.$padding-sm;
+    margin-top: vars.$padding-sm;
+  }
+
+  &__products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: vars.$padding-lg;
+    margin-bottom: vars.$padding-xl;
+  }
+
+  &__pagination {
+    @include mixins.flex-center;
+    gap: vars.$padding-md;
+    margin-top: vars.$padding-xl;
+  }
+
+  &__pagination-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  &__pagination-pages {
+    display: flex;
+    gap: vars.$padding-sm;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  &__empty {
+    text-align: center;
+    padding: vars.$padding-xl;
+  }
+
+  &__empty-title {
+    font-size: vars.$font-size-xl;
+    font-weight: 600;
+    margin-bottom: vars.$padding-md;
+    color: vars.$gray-800;
+  }
+
+  &__empty-text {
+    color: vars.$gray-600;
+  }
+}

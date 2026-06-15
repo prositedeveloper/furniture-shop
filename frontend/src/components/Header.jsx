@@ -21,7 +21,7 @@ const Header = () => {
 
         <nav className="header-nav">
           <Link to="/" className="header-nav-link">Главная</Link>
-          <Link to="/products" className="header-nav-link">Каталог</Link>   
+          <Link to="/catalog" className="header-nav-link">Каталог</Link>   
           {user?.is_staff && (
             <Link to="/admin" className="header-nav-link">Админка</Link>
           )}    

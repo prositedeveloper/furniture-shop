@@ -9,6 +9,9 @@ export default function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalProducts, setTotalProducts] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,11 +21,15 @@ export default function HomePage() {
             params: {
               category_id: selectedCategory,
               search: searchQuery,
+              page: currentPage,
+              page_size: '6'
             },
           }),
           api.get('/products/categories/'),
         ]);
-        setProducts(productsRes.data);
+        setProducts(productsRes.data.results);
+        setTotalPages(Math.ceil(productsRes.data.count / 12));
+        setTotalProducts(productsRes.data.count);
         setCategories(categoriesRes.data);
       } catch (error) {
         console.error('Error fetching data:', error);
