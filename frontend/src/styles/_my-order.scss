@@ -1,0 +1,228 @@
+@use 'variables' as vars;
+@use 'mixins';
+@use "sass:color";
+
+.my-orders-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: vars.$padding-xl 0;
+
+  &__container {
+    padding: 0 vars.$padding-md;
+  }
+
+  &__header {
+    margin-bottom: vars.$padding-xl;
+    text-align: center;
+  }
+
+  &__title {
+    font-size: vars.$font-size-2xl;
+    font-weight: 600;
+    margin-bottom: vars.$padding-sm;
+    color: vars.$gray-800;
+  }
+
+  &__subtitle {
+    color: vars.$gray-600;
+    font-size: vars.$font-size-base;
+  }
+
+  &__orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: vars.$padding-lg;
+  }
+
+  &__order-card {
+    background: vars.$white;
+    border-radius: vars.$radius-lg;
+    box-shadow: vars.$shadow-sm;
+    overflow: hidden;
+    transition: vars.$transition;
+
+    &:hover {
+      box-shadow: vars.$shadow-md;
+    }
+  }
+
+  &__order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: vars.$padding-md vars.$padding-lg;
+    background: vars.$gray-50;
+    border-bottom: 1px solid vars.$gray-200;
+  }
+
+  &__order-number {
+    font-weight: 600;
+    font-size: vars.$font-size-base;
+    color: vars.$gray-800;
+  }
+
+  &__order-date {
+    font-size: vars.$font-size-sm;
+    color: vars.$gray-500;
+  }
+
+  &__status {
+    display: inline-flex;
+    align-items: center;
+    gap: vars.$padding-xl;
+    padding: 4px 12px;
+    border-radius: vars.$radius-full;
+    font-size: vars.$font-size-xl;
+    font-weight: 500;
+
+    &--pending {
+      background: #fff3e0;
+      color: #ed6c02;
+    }
+
+    &--cancelled {
+      background: #ffebee;
+      color: #d32f2f;
+    }
+
+    &--delivered {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    &--processing,
+    &--shipped {
+      background: #e3f2fd;
+      color: #0288d1;
+    }
+  }
+
+  &__order-body {
+    padding: vars.$padding-lg;
+  }
+
+  &__order-items {
+    margin-bottom: vars.$padding-lg;
+  }
+
+  &__order-item {
+    display: flex;
+    align-items: center;
+    gap: vars.$padding-md;
+    padding: vars.$padding-sm 0;
+    border-bottom: 1px solid vars.$gray-100;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__item-image {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: vars.$radius-md;
+    background: vars.$gray-100;
+  }
+
+  &__item-info {
+    flex: 1;
+
+    h4 {
+      margin: 0 0 4px 0;
+      font-size: vars.$font-size-base;
+      font-weight: 500;
+      color: vars.$gray-800;
+    }
+
+    p {
+      margin: 0;
+      font-size: vars.$font-size-sm;
+      color: vars.$gray-600;
+    }
+  }
+
+  &__item-price {
+    font-weight: 500;
+    color: vars.$gray-800;
+    white-space: nowrap;
+  }
+
+  &__order-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: vars.$padding-md;
+    border-top: 1px solid vars.$gray-200;
+  }
+
+  &__total {
+    font-size: vars.$font-size-base;
+    font-weight: 500;
+
+    span {
+      color: vars.$gray-600;
+      margin-right: vars.$padding-sm;
+    }
+
+    strong {
+      color: vars.$gray-800;
+      font-size: vars.$font-size-lg;
+    }
+  }
+
+  &__cancel-btn {
+    @include mixins.btn-style(vars.$red, vars.$white, color.adjust(vars.$red, $lightness: -10%));
+    padding: vars.$padding-sm vars.$padding-lg;
+    font-size: vars.$font-size-sm;
+    display: inline-flex;
+    align-items: center;
+    gap: vars.$padding-sm;
+  }
+
+  &__empty {
+    text-align: center;
+    padding: vars.$padding-xl;
+    background: vars.$gray-50;
+    border-radius: vars.$radius-lg;
+
+    &-icon {
+      width: 64px;
+      height: 64px;
+      color: vars.$gray-400;
+      margin-bottom: vars.$padding-md;
+    }
+
+    h3 {
+      margin-bottom: vars.$padding-sm;
+      font-size: vars.$font-size-xl;
+    }
+
+    p {
+      color: vars.$gray-600;
+      margin-bottom: vars.$padding-lg;
+    }
+  }
+}
+
+.loading-container {
+  @include mixins.flex-center;
+  flex-direction: column;
+  gap: vars.$padding-md;
+  padding: vars.$padding-xl;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid vars.$gray-200;
+  border-top-color: vars.$primary;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -10,6 +10,9 @@ import ProductPage from './pages/ProductPage'
 import CartPage from './pages/CartPage'
 import ProfilePage from './pages/ProfilePage'
 import CatalogPage from './pages/CatalogPage'
+import CheckoutPage from './pages/CheckoutPage'
+import OrderSuccessPage from './pages/OrderSuccessPage'
+import MyOrdersPage from './pages/MyOrdersPage'
 
 function App() {
   return (
@@ -48,6 +51,9 @@ function App() {
           <Route path='register' element={<RegisterPage />} />
           <Route path='profile' element={<ProfilePage />} />
           <Route path='catalog' element={<CatalogPage />} />
+          <Route path='checkout' element={<CheckoutPage />} />
+          <Route path='order-success' element={<OrderSuccessPage />} />
+          <Route path='my-orders' element={<MyOrdersPage />} />
         </Route>
       </Routes>
     </>

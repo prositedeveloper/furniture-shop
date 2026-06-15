@@ -1,0 +1,59 @@
+@use "variables" as vars;
+@use "mixins";
+
+.footer {
+  background-color: vars.$gray-900;
+  color: vars.$white;
+  padding: vars.$padding-xl 0;
+  margin-top: auto;
+
+  &-container {
+    @include mixins.flex-center;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 vars.$padding-md;
+    gap: vars.$padding-xl;
+  }
+
+  &-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: vars.$padding-xl;
+    width: 100%;
+  }
+
+  &-column {
+    &-title {
+      font-size: vars.$font-size-lg;
+      font-weight: 600;
+      margin-bottom: vars.$padding-md;
+      color: vars.$gray-500;
+    }
+
+    &-links {
+      display: flex;
+      flex-direction: column;
+      gap: vars.$padding-sm;
+      list-style: none;
+      padding: 0;
+    }
+
+    &-link {
+      color: vars.$gray-400;
+      transition: vars.$transition;
+
+      &:hover {
+        color: vars.$white;
+      }
+    }
+  }
+
+  &-bottom {
+    border-top: 1px solid vars.$gray-800;
+    padding-top: vars.$padding-lg;
+    text-align: center;
+    color: vars.$gray-400;
+    font-size: vars.$font-size-sm;
+  }
+}

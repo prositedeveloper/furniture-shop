@@ -1,0 +1,134 @@
+@use 'variables' as vars;
+@use 'mixins';
+
+.header {
+  background-color: vars.$white;
+  box-shadow: vars.$shadow-sm;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: vars.$header-height;
+
+  &-container {
+    @include mixins.flex-between;
+    height: 100%;
+    padding: 0 vars.$padding-lg;
+  }
+
+  &-logo {
+    font-size: vars.$font-size-base;
+    font-weight: 700;
+    color: vars.$primary;
+
+    @media (min-width: 576px) {
+      font-size: vars.$font-size-2xl;
+    }
+  }
+
+  &-nav {
+    display: none;
+
+    @media (min-width: 768px) {
+      display: flex;
+      gap: vars.$padding-lg;
+    }
+
+    &-link {
+      color: vars.$gray-700;
+      font-weight: 500;
+      transition: vars.$transition;
+
+      &:hover {
+        color: vars.$primary;
+      }
+    }
+  }
+
+  &-actions {
+    @include mixins.flex-center;
+    gap: vars.$padding-md;
+
+    @media (max-width: 480px) {
+      gap: vars.$padding-sm;
+    }
+  }
+
+  &-cart {
+    position: relative;
+
+    &-count {
+      position: absolute;
+      top: -0.5rem;
+      right: -0.5rem;
+      background-color: vars.$primary;
+      color: vars.$white;
+      border-radius: vars.$radius-full;
+      width: 1.5rem;
+      height: 1.5rem;
+      @include mixins.flex-center;
+      font-size: vars.$font-size-sm;
+      font-weight: 600;
+    }
+  }
+
+  &-user {
+    @include mixins.flex-center;
+    gap: vars.$padding-sm;
+
+    &-name {
+      font-weight: 500;
+      @include mixins.text-truncate;
+      max-width: 100px;
+
+      @media (max-width: 768px) {
+        max-width: 80px;
+      }
+    }
+
+    &-btn {
+      @media (max-width: 480px) {
+        display: none;
+      }
+    }
+  }
+
+  &-menu-btn {
+    @include mixins.flex-center;
+    padding: vars.$padding-sm;
+    border-radius: vars.$radius-md;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: vars.$transition;
+
+    &:hover {
+      background-color: vars.$gray-100;
+    }
+
+    @media (min-width: 768px) {
+      display: none;
+    }
+  }
+
+  &-mobile-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: vars.$white;
+    box-shadow: vars.$shadow-lg;
+    padding: vars.$padding-lg;
+    z-index: 99;
+
+    &-active {
+      display: block;
+    }
+
+    &-nav {
+      display: flex;
+      flex-direction: column;
+      gap: vars.$padding-md;
+    }
+  }
+}

@@ -22,6 +22,7 @@ const Header = () => {
         <nav className="header-nav">
           <Link to="/" className="header-nav-link">Главная</Link>
           <Link to="/catalog" className="header-nav-link">Каталог</Link>   
+          <Link to="/my-orders" className="header-nav-link">Мои заказы</Link>  
           {user?.is_staff && (
             <Link to="/admin" className="header-nav-link">Админка</Link>
           )}    
@@ -41,7 +42,7 @@ const Header = () => {
                 <User className="w-6 h-6" />
                 <span className="header-user-name" title={user.username}>{user.username}</span>
               </Link>
-              <button onClick={logout} className="btn btn-outline btn-sm">
+              <button onClick={logout} className="header-user-btn btn btn-outline btn-sm">
                 <LogOut className="h-5 w-5" />
               </button>
             </>
@@ -61,7 +62,7 @@ const Header = () => {
             <Link to="/" onClick={() => setIsMenuOpen(false)} className="header-nav-link">
               Главная
             </Link>
-            <Link to="/products" onClick={() => setIsMenuOpen(false)} className="header-nav-link">
+            <Link to="/catalog" onClick={() => setIsMenuOpen(false)} className="header-nav-link">
               Каталог
             </Link>
             {user?.is_staff && (
@@ -74,7 +75,7 @@ const Header = () => {
               <Link to="/profile" onClick={() => setIsMenuOpen(false)} className="header-nav-link">
                 Профиль
               </Link>
-              <button onClick={() => {logout(); setIsMenuOpen(false)}} className="header-nav-link">
+              <button onClick={() => {logout(); setIsMenuOpen(false)}} className="btn btn-outline btn-sm">
                 Выйти
               </button>
              </> 

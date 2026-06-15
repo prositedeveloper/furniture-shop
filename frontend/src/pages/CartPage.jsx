@@ -1,13 +1,16 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ShoppingCart, Trash2, ArrowLeft } from "lucide-react";
 import { useCart } from "../context/CartContext";
 
 const CartPage = () => {
   const { cartItems, updateQuantity, removeItem, getTotal } = useCart();
+  const navigate = useNavigate();
   const total = getTotal();
 
-  
+  const handleCheckout = () => {
+    navigate('/checkout', {state: { cartItems, total }})
+  };
 
   return (
     <div className="container">
@@ -90,7 +93,7 @@ const CartPage = () => {
               <span>Итог:</span>
               <span>{total} ₽</span>
             </div>
-            <button className="cart-page-summary-btn">Оформить заказ</button>
+            <button onClick={handleCheckout} className="cart-page-summary-btn">Оформить заказ</button>
           </div>
         </div>
       )}

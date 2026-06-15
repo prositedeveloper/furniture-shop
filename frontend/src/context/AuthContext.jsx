@@ -9,6 +9,9 @@ export const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    
+
+    const isAuthenticated = !!user;
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -79,7 +82,7 @@ export const AuthProvider = ({children}) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, loading, login, register, logout, updateProfile }}>
+        <AuthContext.Provider value={{ user, loading, login, register, logout, updateProfile, isAuthenticated }}>
             {children}
         </AuthContext.Provider>
     )
