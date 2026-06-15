@@ -47,11 +47,11 @@ function App() {
         <Route path='/' element={<Layout/>}>
           <Route index element={<HomePage />} />
           <Route path="products/:id" element={<ProductPage />} />
-          <Route path="cart" element={<CartPage />} />
           <Route path='login' element={<LoginPage />} />
           <Route path='register' element={<RegisterPage />} />
           <Route path='catalog' element={<CatalogPage />} />
           <Route element={<ProtectedRoute />}>
+            <Route path="cart" element={<CartPage />} />
             <Route path='checkout' element={<CheckoutPage />} />
             <Route path='order-success' element={<OrderSuccessPage />} />
             <Route path='my-orders' element={<MyOrdersPage />} />

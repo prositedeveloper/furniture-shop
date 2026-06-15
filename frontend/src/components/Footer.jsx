@@ -21,9 +21,9 @@ const Footer = () => {
           <div className="footer-column">
             <h3 className="footer-column-title">Контакты</h3>
             <ul className="footer-column-links">
-              <li className="footer-column-link">Email: info@mebelshop.ru</li>
-              <li className="footer-column-link">Телефон: +7 (123) 456-78-90</li>
-              <li className="footer-column-link">Адрес: г. Москва, ул. Ленина, 1</li>
+              <li className="footer-column-link">Email: info@mebel-dagestan.ru</li>
+              <li className="footer-column-link">Телефон: +7 (963) 423-05-22</li>
+              <li className="footer-column-link">Адрес: г. Каспийск, ул. Ленина, 1</li>
             </ul>
           </div>
         </div>
