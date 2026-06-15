@@ -17,6 +17,9 @@ const OrderSuccessPage = () => {
       <Link to="/" className="btn btn-primary" style={{ marginTop: "20px" }}>
         Вернуться на главную
       </Link>
+      <Link to="/my-orders" className="btn btn-outline" style={{ marginTop: "20px" }}>
+        Мои заказы
+      </Link>
     </div>
   );
 };

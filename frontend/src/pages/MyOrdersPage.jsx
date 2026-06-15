@@ -7,14 +7,15 @@ import toast from "react-hot-toast";
 
 const MyOrdersPage = () => {
   const navigate = useNavigate();
+  const { user, loading: authLoading } = useAuth();
   const [orders, setOrders] = useState([]);
-  const [loading, setLoading] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [cancellingId, setCancellingId] = useState(null);
-
-  const { isAuthenticated, loading: authLoading } = useAuth();
 
   const hasShownAuthError = useRef(false);
   const hasFetchedOrders = useRef(false);
+
+  const isAuthenticated = !!user;
 
   useEffect(() => {
     if (authLoading) return;
@@ -38,6 +39,7 @@ const MyOrdersPage = () => {
     try {
       setLoading(true);
       const response = await api.get("/orders/orders/");
+      console.log("Заказы:", response.data);
       setOrders(response.data.results || response.data);
     } catch (error) {
       console.error("Ошибка:", error);
@@ -55,11 +57,12 @@ const MyOrdersPage = () => {
       await api.post(`/orders/orders/${orderId}/cancel/`);
       toast.success("Заказ отменен");
       setOrders(
-        orders.map((order) => {
-          order.id === orderId ? { ...order, status: "cancelled" } : order;
-        }),
+        orders.map((order) =>
+          order.id === orderId ? { ...order, status: "cancelled" } : order,
+        ),
       );
     } catch (error) {
+      console.error("Ошибка отмены:", error);
       toast.error("Ошибка при отмене");
     } finally {
       setCancellingId(null);

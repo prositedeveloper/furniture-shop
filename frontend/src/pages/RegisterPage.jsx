@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { Eye, EyeOff, UserPlus } from "lucide-react";
 import toast from "react-hot-toast";
+import useRedirectIfAuthenticated from "../hooks/useRedirectIfAuthenticated";
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -16,8 +17,14 @@ const RegisterPage = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
-  const { register, loading } = useAuth();
+  const { user, register, loading } = useAuth();
   const navigate = useNavigate();
+
+  const { isLoading, isAuthenticated  } = useRedirectIfAuthenticated('/');
+
+  if (isAuthenticated) {
+    return null;
+  }
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

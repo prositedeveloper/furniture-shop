@@ -13,6 +13,7 @@ import CatalogPage from './pages/CatalogPage'
 import CheckoutPage from './pages/CheckoutPage'
 import OrderSuccessPage from './pages/OrderSuccessPage'
 import MyOrdersPage from './pages/MyOrdersPage'
+import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
   return (
@@ -49,11 +50,13 @@ function App() {
           <Route path="cart" element={<CartPage />} />
           <Route path='login' element={<LoginPage />} />
           <Route path='register' element={<RegisterPage />} />
-          <Route path='profile' element={<ProfilePage />} />
           <Route path='catalog' element={<CatalogPage />} />
-          <Route path='checkout' element={<CheckoutPage />} />
-          <Route path='order-success' element={<OrderSuccessPage />} />
-          <Route path='my-orders' element={<MyOrdersPage />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path='checkout' element={<CheckoutPage />} />
+            <Route path='order-success' element={<OrderSuccessPage />} />
+            <Route path='my-orders' element={<MyOrdersPage />} />
+            <Route path='profile' element={<ProfilePage />} />
+          </Route>
         </Route>
       </Routes>
     </>
