@@ -1,5 +1,6 @@
 @use "variables" as vars;
 @use "mixins";
+@use 'sass:color';
 
 .cart {
   &-page {
@@ -155,7 +156,7 @@
           -webkit-tap-highlight-color: transparent;
 
           &:hover {
-            background-color: darken(vars.$red, 10%);
+            background-color: color.adjust(vars.$red, $lightness: -10%);
             color: vars.$white;
           }
 

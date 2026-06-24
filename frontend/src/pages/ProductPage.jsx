@@ -8,20 +8,20 @@ import toast from "react-hot-toast";
 const getImageUrl = (imagePath) => {
   if (!imagePath) return "https://placehold.co/600x400?text=Нет картинки";
 
-  if (imagePath.startsWith('http')) {
+  if (imagePath.startsWith("http")) {
     return imagePath;
   }
 
-  const baseUrl = 'http://localhost:8000';
+  const baseUrl = "http://localhost:8000";
 
-  const cleanPath = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
+  const cleanPath = imagePath.startsWith("/") ? imagePath : `/${imagePath}`;
 
   return `${baseUrl}${cleanPath}`;
 };
 
 const ProductPage = () => {
   const { id } = useParams();
-  const { addToCart, isInCart } = useCart();
+  const { addToCart, isInCart, isAuthenticated } = useCart();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
@@ -57,14 +57,14 @@ const ProductPage = () => {
 
     if (product?.image) {
       images.push({
-        id: 'main',
+        id: "main",
         image: product.image,
-        isMain: true
+        isMain: true,
       });
     }
 
     if (product?.images?.length > 0) {
-      images.push(...product.images.map(img => ({...img, isMain: false})));
+      images.push(...product.images.map((img) => ({ ...img, isMain: false })));
     }
 
     return images;
@@ -79,11 +79,15 @@ const ProductPage = () => {
     }
 
     setIsAdding(true);
-    await new Promise(resolve => setTimeout(resolve, 200));
+    await new Promise((resolve) => setTimeout(resolve, 200));
 
-    addToCart(product, quantity);
-    toast.success(`Товар "${product.title}" добавлен в корзину в количестве ${quantity} шт.`)
+    const isAdded = addToCart(product, quantity);
 
+    if (isAdded) {
+      toast.success(
+        `Товар "${product.title}" добавлен в корзину в количестве ${quantity} шт.`,
+      );
+    }
     setTimeout(() => setShowSuccess(false), 200);
 
     setIsAdding(false);
@@ -99,12 +103,12 @@ const ProductPage = () => {
   }
 
   if (!product) {
-    <div className="home-page__empty">
-      <div className="home-page__empty-title">Товар не найден</div>
-      <p className="home-page__empty-text">
-        Вернитесь на главную страницу
-      </p>
-    </div>;
+    return (
+      <div className="home-page__empty">
+        <div className="home-page__empty-title">Товар не найден</div>
+        <p className="home-page__empty-text">Вернитесь на главную страницу</p>
+      </div>
+    );
   }
 
   const allImages = getAllImages();
@@ -114,13 +118,15 @@ const ProductPage = () => {
       <div className="product-page-container">
         <div>
           <div className="product-page-image">
-            <img 
-              src={getImageUrl(mainImage || product.image)} 
-              alt={product.title} 
+            <img
+              src={getImageUrl(mainImage || product.image)}
+              alt={product.title}
               className="product-page-image-main"
             />
             {product.discount > 0 && (
-              <span className="product-page-image-discount">-{product.discount}%</span>
+              <span className="product-page-image-discount">
+                -{product.discount}%
+              </span>
             )}
           </div>
           {allImages.length > 0 && (
@@ -129,13 +135,13 @@ const ProductPage = () => {
                 <div
                   key={img.id || index}
                   className={`product-page-image-gallery-item ${
-                    selectedImageIndex === index ? 'active' : ''
+                    selectedImageIndex === index ? "active" : ""
                   }`}
                   onClick={() => changeMainImage(img.image, index)}
                 >
-                  <img 
+                  <img
                     src={getImageUrl(img.image)}
-                    alt={`${product.title} - вид ${index + 1}`} 
+                    alt={`${product.title} - вид ${index + 1}`}
                   />
                 </div>
               ))}
@@ -156,29 +162,37 @@ const ProductPage = () => {
                 </span>
               </>
             ) : (
-              <span className="product-page-info-price-current">{product.price}</span>
+              <span className="product-page-info-price-current">
+                {product.price}
+              </span>
             )}
           </div>
 
           <div className="product-page-info-section">
             <h3 className="product-page-info-section-title">Описание</h3>
-            <p className="product-page-info-section-value">{product.description}</p>
+            <p className="product-page-info-section-value">
+              {product.description}
+            </p>
           </div>
 
           <div className="product-page-info-section">
             <h3 className="product-page-info-section-title">Категория</h3>
-            <p className="product-page-info-section-value">{product.category?.name}</p>
+            <p className="product-page-info-section-value">
+              {product.category?.name}
+            </p>
           </div>
 
           <div className="product-page-info-section">
             <h3 className="product-page-info-section-title">В наличии</h3>
-            <p className={`product-page-info-stock ${product.stock > 0 ? '' : 'product-page-info-stock-out'}`}>
-              {product.stock > 0 ? `${product.stock} шт.` : 'Нет в наличии'}
+            <p
+              className={`product-page-info-stock ${product.stock > 0 ? "" : "product-page-info-stock-out"}`}
+            >
+              {product.stock > 0 ? `${product.stock} шт.` : "Нет в наличии"}
             </p>
           </div>
 
           <div className="product-page-info-quantity">
-            <button 
+            <button
               onClick={() => setQuantity(Math.max(1, quantity - 1))}
               className="product-page-info-quantity-btn"
               disabled={quantity <= 1}
@@ -195,7 +209,7 @@ const ProductPage = () => {
             </button>
           </div>
 
-          <button 
+          <button
             onClick={handleAddToCart}
             className="product-page-info-add-btn"
             disabled={product.stock <= 0 || isAdding}

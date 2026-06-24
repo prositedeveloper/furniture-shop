@@ -37,9 +37,10 @@ const ProductCard = ({ product }) => {
 
     await new Promise(resolve => setTimeout(resolve, 200));
 
-    addToCart(product, 1);
-    toast.success(`Товар "${product.title}" добавлен в корзину`)
-
+    const isAdded = addToCart(product, 1);
+    if (isAdded) {
+      toast.success(`Товар "${product.title}" добавлен в корзину`);
+    }
     setShowSuccess(true);
     setTimeout(() => setShowSuccess(false), 1500);
 

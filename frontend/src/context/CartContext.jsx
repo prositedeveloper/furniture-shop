@@ -1,59 +1,76 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { useAuth } from "./AuthContext";
+import toast from "react-hot-toast";
 
 const CartContext = createContext();
 
 export const useCart = () => {
   const context = useContext(CartContext);
   if (!context) {
-    throw new Error('useCart must be used within CartProvider');
+    throw new Error("useCart must be used within CartProvider");
   }
   return context;
 };
 
 export const CartProvider = ({ children }) => {
+  const { isAuthenticated } = useAuth();
   const [cartItems, setCartItems] = useState(() => {
-    const savedCart = localStorage.getItem('cart');
+    const savedCart = localStorage.getItem("cart");
     return savedCart ? JSON.parse(savedCart) : [];
   });
 
   useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cartItems));
+    localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
   const addToCart = (product, quantity = 1) => {
-    setCartItems(prevItems => {
-      const existingItem = prevItems.find(item => item.product.id === product.id);
+    if (!isAuthenticated) {
+      toast.error(
+        "Пожалуйста, войдите в систему, чтобы добавить товар в корзину",
+      );
+      return false; 
+    }
+
+    setCartItems((prevItems) => {
+      const existingItem = prevItems.find(
+        (item) => item.product.id === product.id,
+      );
 
       if (existingItem) {
-        return prevItems.map(item => {
-          item.product.id === product.id 
-          ? { ...item, quantity: item.quantity + quantity }
-          : item
+        return prevItems.map((item) => {
+          item.product.id === product.id
+            ? { ...item, quantity: item.quantity + quantity }
+            : item;
         });
       }
 
-      return [...prevItems, {
-        id: Date.now(),
-        product: product,
-        quantity: quantity
-      }];
+      return [
+        ...prevItems,
+        {
+          id: Date.now(),
+          product: product,
+          quantity: quantity,
+        },
+      ];
     });
-  };  
+
+    return true;
+  };
 
   const updateQuantity = (id, newQuantity) => {
     if (newQuantity <= 0) {
-      setCartItems(prev => prev.filter(item => item.id !== id));
+      setCartItems((prev) => prev.filter((item) => item.id !== id));
     } else {
-      setCartItems(prev => 
+      setCartItems((prev) =>
         prev.map((item) => {
-          return item.id === id ? { ...item, quantity: newQuantity } : item
-        })
+          return item.id === id ? { ...item, quantity: newQuantity } : item;
+        }),
       );
     }
   };
 
   const removeItem = (id) => {
-    setCartItems(prev => prev.filter(item => item.id !== id));
+    setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
   const clearCart = () => {
@@ -63,7 +80,7 @@ export const CartProvider = ({ children }) => {
   const getTotal = () => {
     return cartItems.reduce(
       (sum, item) => sum + item.product.final_price * item.quantity,
-      0
+      0,
     );
   };
 
@@ -72,27 +89,30 @@ export const CartProvider = ({ children }) => {
   };
 
   const isInCart = (productId) => {
-    return cartItems.some(item => item.product.id === productId);
+    return cartItems.some((item) => item.product.id === productId);
   };
 
   const getItemQuantity = (productId) => {
-    const item = cartItems.find(item => item.product.id === productId);
+    const item = cartItems.find((item) => item.product.id === productId);
     return item ? item.quantity : 0;
   };
 
   return (
-    <CartContext.Provider value={{
-      cartItems,
-      addToCart,
-      updateQuantity,
-      removeItem,
-      clearCart,
-      getTotal,
-      getTotalCount,
-      isInCart,
-      getItemQuantity
-    }}>
+    <CartContext.Provider
+      value={{
+        cartItems,
+        addToCart,
+        updateQuantity,
+        removeItem,
+        clearCart,
+        getTotal,
+        getTotalCount,
+        isInCart,
+        getItemQuantity,
+        isAuthenticated,
+      }}
+    >
       {children}
     </CartContext.Provider>
-  )
+  );
 };
